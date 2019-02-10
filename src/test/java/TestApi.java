@@ -20,7 +20,7 @@ public class TestApi {
         setupRestAssured();
     }
 
-    @Test(description = "Create post", priority = 1)
+    @Test(description = "Create post", priority = 0)
     public void createPost(){
         Map<String,String> post = new HashMap<>();
         post.put("name", "morpheus" );
@@ -31,6 +31,28 @@ public class TestApi {
                 .body(post)
                 .when().post("/api/users")
                 .then().statusCode(201);
+    }
+
+    @Test(description = "Change post", priority = 1)
+    public void changePost(){
+        Map<String,String> user = new HashMap<>();
+        user.put("name", "morpheus" );
+        user.put("job", "zion resident" );
+
+        given().
+                contentType("application/json")
+                .body(user)
+                .when().put("/api/users")
+                .then().statusCode(200);
+    }
+
+    @Test(description = "Delete post", priority = 2)
+    public void deletePost(){
+        given()
+                .when()
+                .delete("/api/users/2")
+                .then()
+                .statusCode(204);
     }
 
 }
