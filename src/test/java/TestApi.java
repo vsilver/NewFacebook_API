@@ -24,7 +24,6 @@ public class TestApi {
     public void createPost(){
         Map<String,String> post = new HashMap<>();
         post.put("name", "morpheus" );
-        post.put("job", "leader" );
 
         given().
                 contentType("application/json")
@@ -35,13 +34,12 @@ public class TestApi {
 
     @Test(description = "Change post", priority = 1)
     public void changePost(){
-        Map<String,String> user = new HashMap<>();
-        user.put("name", "morpheus" );
-        user.put("job", "zion resident" );
+        Map<String,String> post = new HashMap<>();
+        post.put("name", "morpheus" );
 
         given().
                 contentType("application/json")
-                .body(user)
+                .body(post)
                 .when().put("/api/users")
                 .then().statusCode(200);
     }
